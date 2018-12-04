@@ -1,0 +1,131 @@
+[
+  {
+    "id": 1,
+    "question": "<code>[\"1\", \"2\", \"3\"].map(parseInt)<br></code><br>",
+    "options": ["[\"1\", \"2\", \"3\"]", "[1, 2, 3]", "[0, 1, 2]", "other"],
+    "rightAnswer": 2,
+    "comment": "what you actually get is [1, NaN, NaN] because parseInt takes two parameters (val, radix) and map passes 3 (element, index, array)"
+  },
+
+  {
+    "id": 2,
+    "question": "<code>[typeof null, null instanceof Object]<br></code><br>",
+    "options": [
+      "[\"object\", false]",
+      "[null, false]",
+      "[\"object\", true]",
+      "other"
+    ],
+    "rightAnswer": 0,
+    "comment": "typeof will always return \"object\" for native non callable objects."
+  },
+
+  {
+    "id": 3,
+    "question": "<code>[ [3,2,1].reduce(Math.pow), [].reduce(Math.pow) ]<br></code><br>",
+    "options": ["an error", "[9, 0]", "[9, NaN]", "[9, undefined]"],
+    "rightAnswer": 0,
+    "comment": "Per spec: reduce on an empty array without an initial value throws TypeError"
+  },
+
+  {
+    "id": 4,
+    "question": "<code>var val = 'smtg';<br>console.log('Value is ' + (val === 'smtg') ? 'Something' : 'Nothing');<br></code><br>",
+    "options": ["Value is Something", "Value is Nothing", "NaN", "other"],
+    "rightAnswer": 3,
+    "comment": "it actually prints 'Something' the + operator has higher precedence than the ternary one."
+  },
+
+  {
+    "id": 5,
+    "question": "<code>var name = 'World!';<br>(function () {<br>    if (typeof name === 'undefined') {<br>var name = 'Jack';<br>console.log('Goodbye ' + name);<br>    } else {<br>console.log('Hello ' + name);<br>    }<br>})();<br></code><br>",
+    "options": ["Goodbye Jack", "Hello Jack", "Hello undefined", "Hello World"],
+    "rightAnswer": 0,
+    "comment": "The var declaration is hoisted to the function scope, but the initialization is not."
+  },
+
+  {
+    "id": 6,
+    "question": "<code>var END = Math.pow(2, 53);<br>var START = END - 100;<br>var count = 0;<br>for (var i = START; i &lt;= END; i++) {<br>    count++;<br>}<br>console.log(count);<br></code><br>",
+    "options": ["0", "100", "101", "other"],
+    "rightAnswer": 3,
+    "comment": "it goes into an infinite loop, 2^53 is the highest possible number in javascript, and 2^53+1 gives 2^53, so i can never become larger than that."
+  },
+
+  {
+    "id": 7,
+    "question": "<code>var arr = [0,1,2];<br>arr[10] = 10;<br>arr.filter(function(x) { return x === undefined;});<br></code><br>",
+    "options": ["[undefined * 7]", "[0, 1, 2, 10]", "[]", "[undefined]"],
+    "rightAnswer": 2,
+    "comment": "Array.prototype.filter is not invoked for the missing elements."
+  },
+
+  {
+    "id": 8,
+    "question": "<code>var two   = 0.2<br>var one   = 0.1<br>var eight = 0.8<br>var six   = 0.6<br>[two - one == one, eight - six == two]<br></code><br>",
+    "options": ["[true, true]", "[false, false]", "[true, false]", "other"],
+    "rightAnswer": 2,
+    "comment": "JavaScript does not have precision math, even though sometimes it works correctly."
+  },
+
+  {
+    "id": 9,
+    "question": "<code>function showCase(value) {<br>    switch(value) {<br>    case 'A':<br>console.log('Case A');<br>break;<br>    case 'B':<br>console.log('Case B');<br>break;<br>    case undefined:<br>console.log('undefined');<br>break;<br>    default:<br>console.log('Do not know!');<br>    }<br>}<br>showCase(new String('A'));<br></code><br>",
+    "options": ["Case A", "Case B", "Do not know!", "undefined"],
+    "rightAnswer": 2,
+    "comment": "switch uses === internally and new String(x) !== x"
+  },
+
+  {
+    "id": 10,
+    "question": "<code>function showCase2(value) {<br>    switch(value) {<br>    case 'A':<br>console.log('Case A');<br>break;<br>    case 'B':<br>console.log('Case B');<br>break;<br>    case undefined:<br>console.log('undefined');<br>break;<br>    default:<br>console.log('Do not know!');<br>    }<br>}<br>showCase2(String('A'));<br></code><br>",
+    "options": ["Case A", "Case B", "Do not know!", "undefined"],
+    "rightAnswer": 0,
+    "comment": "String(x) does not create an object but does return a string, i.e. typeof String(1) === \"string\""
+  },
+
+  {
+    "id": 11,
+    "question": "<code>function isOdd(num) {<br>    return num % 2 == 1;<br>}<br>function isEven(num) {<br>    return num % 2 == 0;<br>}<br>function isSane(num) {<br>    return isEven(num) || isOdd(num);<br>}<br>var values = [7, 4, '13', -9, Infinity];<br>values.map(isSane);<br></code><br>",
+    "options": [
+      "[true, true, true, true, true]",
+      "[true, true, true, true, false]",
+      "[true, true, true, false, false]",
+      "[true, true, false, false, false]"
+    ],
+    "rightAnswer": 2,
+    "comment": "Infinity % 2 gives NaN, -9 % 2 gives -1 (modulo operator keeps sign so it's result is only reliable compared to 0)"
+  },
+
+  {
+    "id": 12,
+    "question": "<code>parseInt(3, 8)<br>parseInt(3, 2)<br>parseInt(3, 0)<br></code><br>",
+    "options": ["3, 3, 3", "3, 3, NaN", "3, NaN, NaN", "other"],
+    "rightAnswer": 3,
+    "comment": "3 doesn't exist in base 2, so obviously that's a NaN, but what about 0? parseInt will consider a bogus radix and assume you meant 10, so it returns 3."
+  },
+
+  {
+    "id": 13,
+    "question": "<code>Array.isArray( Array.prototype )<br></code><br>",
+    "options": ["true", "false", "error", "other"],
+    "rightAnswer": 0,
+    "comment": "Array.prototype is an Array. Go figure."
+  },
+
+  {
+    "id": 14,
+    "question": "<code>var a = [0];<br>if ([0]) {<br>  console.log(a == true);<br>} else {<br>  console.log(\"wut\");<br>}<br></code><br>",
+    "options": ["true", "false", "\"wut\"", "other"],
+    "rightAnswer": 1,
+    "comment": "[0] as a boolean is considered true. Alas, when using it in the comparisons it gets converted in a different way and all goes to hell."
+  },
+
+  {
+    "id": 15,
+    "question": "<code>[]==[]<br></code><br>",
+    "options": ["true", "false", "error", "other"],
+    "rightAnswer": 1,
+    "comment": "== is the spawn of satan."
+  }
+]

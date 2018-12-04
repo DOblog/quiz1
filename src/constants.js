@@ -1,0 +1,2 @@
+export const QUESTIONS_PER_PAGE = 3;
+export const TIMER_DURATION_SECONDS = 20000;
