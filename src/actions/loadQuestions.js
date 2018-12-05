@@ -1,7 +1,5 @@
 import * as types from './types';
-import { setTimer, startTimer } from './timer';
 import { getQuestions } from '../api';
-import { TIMER_DURATION_SECONDS } from '../constants';
 
 export const loadQuestionsStart = () => ({
   type: types.LOAD_QUESTIONS_START
@@ -19,11 +17,9 @@ export const loadQuestionsFailure = error => ({
 
 export default dispatch => {
   dispatch(loadQuestionsStart());
-  dispatch(setTimer(-1));
   return getQuestions()
     .then(list => {
       dispatch(loadQuestionsSuccess(list));
-      startTimer(dispatch, TIMER_DURATION_SECONDS);
     })
     .catch(error => dispatch(loadQuestionsFailure(error)));
 };

@@ -39,8 +39,10 @@ code {
   top: 0;
   left: calc(50vw + 400px);
   margin: 30px;
-  width: 150px;
+  width: 250px;
   background: yellow;
+  padding: 20px;
+  border-radius: 6px;
 }
 
 .options {

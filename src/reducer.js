@@ -31,12 +31,11 @@ state = {
 */
 
 export default (state = initialState, { type, payload }) => {
-  // console.log({ type, payload });
-
   switch (type) {
     case types.LOAD_QUESTIONS_START:
       return {
         ...state,
+        list: [],
         loading: true
       };
 
@@ -84,10 +83,16 @@ export default (state = initialState, { type, payload }) => {
         )
       };
 
-    case types.TIMER_SET:
+    case types.ADD_NEW_RESULT:
       return {
         ...state,
-        timer: payload.seconds
+        results: [payload.result, ...state.results]
+      };
+
+    case types.CLEAR_RESULTS:
+      return {
+        ...state,
+        results: [state.results[0]]
       };
 
     default:

@@ -11,7 +11,7 @@ export default () => {
 
   return (
     <Layout>
-      <Link to="/quiz" onClick={() => loadQuestions(dispatch)}>
+      <Link to="/quiz" className="btn btn-info" onClick={() => loadQuestions(dispatch)}>
         Начать тест
       </Link>
     </Layout>

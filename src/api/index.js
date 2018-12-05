@@ -1,5 +1,5 @@
 import data from '../data.json';
-import {QUESTIONS_PER_PAGE} from '../constants';
+import { QUESTIONS_PER_PAGE } from '../constants';
 
 export const getQuestions = () => {
   const shuffled = [...data].sort(() => 0.5 - Math.random());
@@ -20,7 +20,7 @@ export const getQuestionData = id =>
       }, 500);
     } else {
       setTimeout(() => {
-        resolve({ error: 'Нет такого вопроса' });
+        reject({ error: 'Нет такого вопроса' });
       }, 500);
     }
   });
